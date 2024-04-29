@@ -5,6 +5,7 @@ use App\Http\Controllers\API\ApiController;
 
 Route::apiResource('role', '\App\Http\Controllers\API\RolesController');
 Route::apiResource('user', '\App\Http\Controllers\API\UserController');
+Route::post("messages", "\App\Http\Controllers\ChatController@message");
 
 Route::post('register',"\App\Http\Controllers\API\ApiController@register");
 Route::post('login',[ApiController::class, 'login']);
