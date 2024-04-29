@@ -17,7 +17,7 @@ class SupportsController extends Controller
         if (Auth::check()) {
             $user = Auth::user();
 
-            if ($user->role_id === 'admin') {
+            if ($user->role_id === 1) {
                 $supports = Supports::all();
             } else {
                 $supports = $user->support()->get();
