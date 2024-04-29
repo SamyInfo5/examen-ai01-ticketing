@@ -29,8 +29,8 @@
       el-button(@click="dialogFormVisible = false") annuler
       el-button(@click="submitFormAdd") Ajouter
 
-  el-dialog(title="Edit Task" :visible.sync="dialogFormEditVisible" @close="closeModal" :rules="rules")
-    el-form( ref="taskPayload" :model="taskPayload")
+  el-dialog(title="Edit Task" :visible.sync="dialogFormEditVisible" @close="closeModal")
+    el-form( ref="taskPayload" :model="taskPayload" :rules="rules")
       el-form-item(label="Title")
         el-input(v-model="taskPayload.name")
       el-form-item(label="description")
