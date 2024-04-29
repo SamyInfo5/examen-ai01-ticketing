@@ -4,12 +4,12 @@
   el-button(type="primary" round @click="dialogFormVisible = true")
     i(class="el-icon-plus")
     span Add Tickets
-  el-card(v-for="(index, i) in ticket" :key="i")
+  el-card.card(v-for="(index, i) in ticket" :key="i")
     el-row
       el-col(:span="12")
         span title : {{ index.name }} <br>
         span description : {{ index.description }}
-      el-col(:span="12")
+      el-col.btn-group(:span="12")
         el-popconfirm(
           title="sur frerot ?"
           confirm-button-text='OK'
@@ -83,7 +83,7 @@ export default {
             });
             this.taskPayload = Object.assign({}, defaulTaskPayload);
           } catch (e) {
-            console.error('Error', e)
+            this.$message.error('Fields missed');
           }
           this.$fetch()
         }
@@ -119,10 +119,9 @@ export default {
             })
             this.taskPayload.name = null;
             this.taskPayload.description = null;
-          } catch (e) {
-            console.error('Error', e)
+          } catch {
+            this.$message.error('Edit failed');
           }
-          this.$fetch()
         }
       })
     },
