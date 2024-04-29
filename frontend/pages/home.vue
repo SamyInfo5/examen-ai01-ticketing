@@ -29,7 +29,7 @@
       el-button(@click="dialogFormVisible = false") annuler
       el-button(@click="submitFormAdd") Ajouter
 
-  el-dialog(title="Edit Task" :visible.sync="dialogFormEditVisible")
+  el-dialog(title="Edit Task" :visible.sync="dialogFormEditVisible" @close="closeModal")
     el-form( ref="taskPayload" :model="taskPayload")
       el-form-item(label="Title")
         el-input(v-model="taskPayload.name")
@@ -117,6 +117,9 @@ export default {
           this.$fetch()
         }
       })
+    },
+    closeModal() {
+      this.taskPayload = Object.assign({}, defaulTaskPayload);
     }
   }
 }
