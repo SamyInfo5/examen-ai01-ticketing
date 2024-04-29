@@ -20,7 +20,7 @@
         el-button(type="primary" icon="el-icon-edit" circle @click="openEditModal(index.id)")
 
   el-dialog(title="Add Task" :visible.sync="dialogFormVisible")
-    el-form( ref="taskPayload" :model="taskPayload")
+    el-form( ref="taskPayload" :model="taskPayload" :rules="rules")
       el-form-item(label="Title")
         el-input(v-model="taskPayload.name")
       el-form-item(label="description")
@@ -29,7 +29,7 @@
       el-button(@click="dialogFormVisible = false") annuler
       el-button(@click="submitFormAdd") Ajouter
 
-  el-dialog(title="Edit Task" :visible.sync="dialogFormEditVisible" @close="closeModal")
+  el-dialog(title="Edit Task" :visible.sync="dialogFormEditVisible" @close="closeModal" :rules="rules")
     el-form( ref="taskPayload" :model="taskPayload")
       el-form-item(label="Title")
         el-input(v-model="taskPayload.name")
@@ -55,7 +55,15 @@ export default {
       ticket: [],
       taskPayload: Object.assign({}, defaulTaskPayload),
       dialogFormVisible: false,
-      dialogFormEditVisible: false
+      dialogFormEditVisible: false,
+      rules: {
+        name: [
+          { required: true, message: 'Please input name', trigger: 'blur' },
+        ],
+        description: [
+          { required: true, message: 'Please input description', trigger: 'blur' },
+        ]
+      }
     }
   },
   async fetch() {
