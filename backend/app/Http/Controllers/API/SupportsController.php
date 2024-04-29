@@ -61,8 +61,9 @@ class SupportsController extends Controller
     public function update(Request $request, Supports $supports, $id)
     {
         if (Auth::check()) {
+            $supports = Supports::find($id);
             $input = $request->all();
-            $supports = Supports::update($input);
+            $supports->update($input);
             return $supports;
         }
     }
