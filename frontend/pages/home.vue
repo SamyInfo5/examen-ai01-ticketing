@@ -8,11 +8,12 @@
     el-row
       el-col(:span="12")
         span title : {{ index.name }} <br>
-        span description : {{ index.description }}
+        span description : {{ index.description }} <br>
+        span Status : {{ getStatusName(index.status_id) }}
       el-col.btn-group(:span="12")
         el-popconfirm(
-          title="sur frerot ?"
-          confirm-button-text='OK'
+          title="your sur ?"
+          confirm-button-text='i am sur'
           cancel-button-text='No, Thanks'
           @confirm="deleteTask(index.id)"
         )
@@ -25,6 +26,9 @@
         el-input(v-model="taskPayload.name")
       el-form-item(label="description")
         el-input(v-model="taskPayload.description")
+      el-select(v-model="taskPayload.status_id" label="status")
+        el-option(v-for="(item, i) in role" :key="i" :label="item.name" :value="item.id")
+
     span(slot="footer" class="dialog-footer")
       el-button(@click="dialogFormVisible = false") annuler
       el-button(@click="submitFormAdd") Ajouter
@@ -35,6 +39,8 @@
         el-input(v-model="taskPayload.name")
       el-form-item(label="description")
         el-input(v-model="taskPayload.description")
+      el-select(v-model="taskPayload.status_id" placeholder="Select a status")
+        el-option(v-for="(item, i) in role" :key="i" :label="item.name" :value="item.id")
     span(slot="footer" class="dialog-footer")
       el-button(@click="dialogFormVisible = false") annuler
       el-button(@click="editTask") Modifier
@@ -44,8 +50,10 @@
 
 const defaulTaskPayload = {
   name: null,
-  description: null
+  description: null,
+  status_id: null
 }
+
 export default {
   name: "HomePage",
   middleware: ['authenticated'],
@@ -53,6 +61,7 @@ export default {
     return {
       editingTaskId: null,
       ticket: [],
+      role: [],
       taskPayload: Object.assign({}, defaulTaskPayload),
       dialogFormVisible: false,
       dialogFormEditVisible: false,
@@ -68,6 +77,7 @@ export default {
   },
   async fetch() {
     this.ticket = await this.$axios.$get('/api/support/')
+    this.role = await this.$axios.$get('/api/status/')
   },
   methods: {
     submitFormAdd() {
@@ -78,7 +88,7 @@ export default {
             this.dialogFormVisible = false
             this.$notify({
               title: 'Success',
-              message: 'Tâche Crée',
+              message: 'Task Created',
               type: 'success'
             });
             this.taskPayload = Object.assign({}, defaulTaskPayload);
@@ -93,7 +103,7 @@ export default {
       this.$axios.$delete(`/api/support/${id}/`)
       this.$notify({
         title: 'Deleted',
-        message: 'Tâche Supprimer',
+        message: 'Task Deleted',
         type: 'success'
       });
       this.$fetch()
@@ -114,11 +124,12 @@ export default {
             this.dialogFormEditVisible = false
             this.$notify({
               title: 'Success',
-              message: 'Tâche Crée',
+              message: 'Task Edited',
               type: 'success'
             })
             this.taskPayload.name = null;
             this.taskPayload.description = null;
+            this.$fetch()
           } catch {
             this.$message.error('Edit failed');
           }
@@ -127,7 +138,11 @@ export default {
     },
     closeModal() {
       this.taskPayload = Object.assign({}, defaulTaskPayload);
-    }
+    },
+    getStatusName(statusId) {
+    const status = this.role.find(item => item.id === statusId)
+    return status ? status.name : 'Unknown'
+  },
   }
 }
 </script>

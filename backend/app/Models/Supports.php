@@ -12,10 +12,15 @@ class Supports extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'status_id'
     ];
     public function user()
     {
         return $this->belongsToMany(User::class);
+    }
+    public function status()
+    {
+        return $this->belongsToMany(Status::class);
     }
 }

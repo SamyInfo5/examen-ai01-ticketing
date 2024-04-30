@@ -15,4 +15,5 @@ Route::group([
     Route::get("profile", "\App\Http\Controllers\API\ApiController@profile");
     Route::get("logout", [ApiController::class, "logout"]);
     Route::apiResource('support', '\App\Http\Controllers\API\SupportsController');
+    Route::apiResource('status', '\App\Http\Controllers\API\StatusController');
 });
