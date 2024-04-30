@@ -3,6 +3,9 @@ div
   ul(v-if="auth")
     li
       el-button
+        NuxtLink(to="/home") Home
+    li
+      el-button
         NuxtLink(to="/messages") Messages
     li
       el-button(@click="logout") deconnecter
@@ -24,7 +27,6 @@ export default {
   },
   methods: {
     logout() {
-      console.log('coucu')
       this.$store.dispatch('logout')
       this.$router.push('/')
     }

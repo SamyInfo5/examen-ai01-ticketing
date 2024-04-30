@@ -1,11 +1,11 @@
 <template lang="pug">
 .container
   .chat-box
-    div.df(v-for="(item, index) in messages" :key="index" :class="{ 'even-message': index % 2 === 0 }")
+    div.messages(v-for="(item, index) in messages" :key="index" :class="item.username === username ? 'sent-mess': 'received-mess'")
       span {{ item.username }}
-      span.messages {{ item.message }}
+      span(:class="item.username === username ? 'sent': 'received'" ) {{ item.message }}
     .sendMessage
-      el-form()
+      el-form.input-chat
         el-input(placeholder="Enter Your Messages" v-model="message")
         el-button(@click="send") Send
 </template>
@@ -31,7 +31,6 @@ export default {
     const channel = pusher.subscribe('chat');
     console.log({ channel })
     channel.bind('message', (data) => {
-      console.log(data)
       this.messages.push(data)
     });
   },
@@ -50,17 +49,4 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-.even-message {
-  background-color: blue;
-  color: white;
-  span{
-    color: white !important;
-  }
-}
-.df{
-  display: flex;
-  flex-direction: column;
-}
 </style>
