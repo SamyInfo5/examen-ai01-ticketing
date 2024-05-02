@@ -20,12 +20,12 @@ class RolesSeeder extends Seeder
 
         // Create test Roles
         Roles::create([
-            'name' => 'test',
+            'name' => 'support',
         ]);
 
         // Create support user
         Roles::create([
-            'name' => 'support',
+            'name' => 'client',
         ]);
     }
 }
