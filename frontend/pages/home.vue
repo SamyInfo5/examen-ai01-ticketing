@@ -22,11 +22,11 @@
 
   el-dialog(title="Add Task" :visible.sync="dialogFormVisible")
     el-form( ref="taskPayload" :model="taskPayload" :rules="rules")
-      el-form-item(label="Title")
+      el-form-item(label="Title" prop="name")
         el-input(v-model="taskPayload.name")
-      el-form-item(label="description")
+      el-form-item(label="description" prop="description")
         el-input(v-model="taskPayload.description")
-      el-select(v-model="taskPayload.status_id" label="status")
+      el-select(v-model="taskPayload.status_id" label="status" prop="status")
         el-option(v-for="(item, i) in role" :key="i" :label="item.name" :value="item.id")
 
     span(slot="footer" class="dialog-footer")
@@ -35,11 +35,11 @@
 
   el-dialog(title="Edit Task" :visible.sync="dialogFormEditVisible" @close="closeModal")
     el-form( ref="taskPayload" :model="taskPayload" :rules="rules")
-      el-form-item(label="Title")
+      el-form-item(label="Title" prop="name")
         el-input(v-model="taskPayload.name")
-      el-form-item(label="description")
+      el-form-item(label="description" prop="description")
         el-input(v-model="taskPayload.description")
-      el-select(v-model="taskPayload.status_id" placeholder="Select a status")
+      el-select(v-model="taskPayload.status_id" placeholder="Select a status" prop="status")
         el-option(v-for="(item, i) in role" :key="i" :label="item.name" :value="item.id")
     span(slot="footer" class="dialog-footer")
       el-button(@click="dialogFormVisible = false") annuler
@@ -71,6 +71,9 @@ export default {
         ],
         description: [
           { required: true, message: 'Please input description', trigger: 'blur' },
+        ],
+        status: [
+          { required: true, message: 'Please input status', trigger: 'blur' },
         ]
       }
     }
