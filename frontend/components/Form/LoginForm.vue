@@ -4,7 +4,7 @@
     el-form-item(label="Username")
       el-input(v-model="loginPayload.name")
     el-form-item(label="password")
-      el-input(v-model="loginPayload.password" type="password")
+      el-input(v-model="loginPayload.password" type="password" show-password)
     el-button(@click="submitForm") Login
 </template>
 

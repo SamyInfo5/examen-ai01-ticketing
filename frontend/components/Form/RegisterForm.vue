@@ -6,9 +6,9 @@
     el-form-item(label="email" prop="email")
       el-input(v-model="registerPayload.email")
     el-form-item(label="password" prop="pass" autocomplete="off")
-      el-input(v-model="registerPayload.password" type="password")
+      el-input(v-model="registerPayload.password" type="password" show-password)
     el-form-item(label="confirmpassword" prop="checkPass" autocomplete="off")
-      el-input(v-model="registerPayload.confirmpassword" type="password")
+      el-input(v-model="registerPayload.confirmpassword" type="password" show-password)
     el-form-item(label="Role" prop="role")
       el-select(v-model='registerPayload.role_id')
         el-option(
