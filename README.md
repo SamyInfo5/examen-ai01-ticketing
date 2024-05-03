@@ -23,8 +23,8 @@ with
 ```
 DB_CONNECTION=sqlite <---- mysql
 DB_HOST=127.0.0.1
-DB_PORT=3306 <---- your port 
-DB_DATABASE=laravel <---- ticketing
+DB_PORT= 8889 
+DB_DATABASE=ticketing
 DB_USERNAME=root <---- username for phpmyadmin
 DB_PASSWORD= <---- your password for phpmyadmin
 ```
@@ -53,7 +53,9 @@ php artisan serve
 ```
 
 # Frontend : 
-enter a folder frontend and run this commande : 
+in the cmd, enter a folder frontend and run this commande : 
 ```
 npm i
 ```
+
+Finnaly go to browser in http://localhost:3000
