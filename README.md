@@ -56,6 +56,7 @@ php artisan serve
 in the cmd, enter a folder frontend and run this commande : 
 ```
 npm i
+npm run dev
 ```
 
 Finnaly go to browser in http://localhost:3000
